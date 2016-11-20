@@ -11,5 +11,11 @@ package logo;
  */
 public class Player {
     String name;
+    Enums.PawnType pawn;
     
+    public Player(String name, Enums.PawnType pawnType)
+    {
+        this.name = name;
+        this.pawn = pawnType;
+    }
 }

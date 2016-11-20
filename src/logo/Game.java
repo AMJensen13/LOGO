@@ -6,20 +6,51 @@
 package logo;
 import UserInterface.*;
 import java.util.*;
+import javax.swing.*;
 /**
  *
  * @author AMJensen13
  */
 public class Game {
-    Deck deck;
+    ArrayList<Card> cards = new ArrayList<>(
+            Arrays.asList());
     ArrayList<Player> players;
+    Deck deck;
     Player currentPlayer;
     
     GameUI gameUI;
     
-    public Game(){
-        //inquire about player count
-        //setup players and their names/pawn type
-        //
+    public Game()
+    {
+        deck = new Deck(cards);
+    }
+    
+    public void start()
+    {
+        setupPlayers();
+        
+    }
+    
+    private void setupPlayers()
+    {
+        int playerCount = Integer.parseInt(JOptionPane.showInputDialog("Pick a number of players between 3 and 6:"));
+        List<Enums.PawnType> availablePawns = new ArrayList<>(
+                Arrays.asList(Enums.PawnType.RED, Enums.PawnType.BLUE, 
+                              Enums.PawnType.GREEN, Enums.PawnType.YELLOW, 
+                              Enums.PawnType.ORANGE, Enums.PawnType.PURPLE));
+        
+        for(int i = 0; i < playerCount; i++)
+        {
+            String name = JOptionPane.showInputDialog("Player " + (i + 1) + " please enter your name: ");
+            Enums.PawnType pawn = (Enums.PawnType)JOptionPane.showInputDialog(
+                    null, "Player " + (i + 1) + " please choose a pawn: ", "Choose a Pawn", 
+                    JOptionPane.OK_OPTION, null, availablePawns.toArray(), availablePawns.get(0));
+            
+            players.add(new Player(name, pawn));
+            availablePawns.remove(pawn);
+        }
+        
+        Collections.shuffle(players, new Random(System.currentTimeMillis()));
+        currentPlayer = players.get(0);
     }
 }
