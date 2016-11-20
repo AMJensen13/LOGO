@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package logo;
-import javax.swing.*;
+import javax.swing.ImageIcon;
 import java.util.*;
 
 /**
@@ -12,8 +12,23 @@ import java.util.*;
  * @author AMJensen13
  */
 public class Card {
-    ImageIcon questionSide = new ImageIcon(this.getClass().getResource("Resources/Template_Front.jpg"));
-    ImageIcon logoSide = new ImageIcon(this.getClass().getResource("Resources/Template_Back.jpg"));
+    ImageIcon questionSide;
+    ImageIcon logoSide;
     ArrayList<Question> questions;
     
+    public Card(ArrayList<Question> questions)
+    {
+        this.questions = questions;
+        questionSide = new ImageIcon(this.getClass().getResource("Resources/Template_Back.jpg"));
+    }
+    
+    public Question getQuestion(int idx)
+    {
+        return questions.get(idx);
+    }
+    
+    public ImageIcon getQuestionImage()
+    {
+        return questionSide;
+    }
 }
