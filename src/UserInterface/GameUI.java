@@ -11,4 +11,9 @@ import javax.swing.*;
  */
 public class GameUI extends JPanel{
     BoardUI boardUI;
+    
+    public GameUI()
+    {
+        
+    }
 }

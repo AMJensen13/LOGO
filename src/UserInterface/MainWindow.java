@@ -12,4 +12,13 @@ import javax.swing.*;
  */
 public class MainWindow extends JFrame{
     GameUI gameUI;
+    MainMenu mainMenu;
+    
+    public MainWindow()
+    {
+        super("Logo");
+        gameUI = new GameUI();
+        mainMenu = new MainMenu();
+    }
+    
 }
