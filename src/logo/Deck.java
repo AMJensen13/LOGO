@@ -14,4 +14,24 @@ import java.util.*;
 public class Deck {
     ArrayList<Card> cards;
     
+    public Deck(ArrayList<Card> cards)
+    {
+        this.cards = cards;
+        shuffleDeck();
+    }
+    
+    private void shuffleDeck()
+    {
+        Collections.shuffle(cards, new Random(System.currentTimeMillis()));
+    }
+    
+    public Card drawCard()
+    {
+        Card retCard = cards.get(0);
+        
+        cards.remove(0);
+        cards.add(retCard);
+        
+        return retCard;
+    }
 }

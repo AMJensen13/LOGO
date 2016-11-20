@@ -32,13 +32,9 @@ public class Question {
     
     public boolean CheckAnswer(int option)
     {
-        for(String s : options)
-        {
-            if(options.get(option).equals(s))
-                return true;
-        }
+        String answer = options.get(option);
         
-        return false;
+        return answer.equals(correctAnswer);
     }
     
 }
