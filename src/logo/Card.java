@@ -14,5 +14,6 @@ import java.util.*;
 public class Card {
     ImageIcon questionSide = new ImageIcon(this.getClass().getResource("Resources/Template_Front.jpg"));
     ImageIcon logoSide = new ImageIcon(this.getClass().getResource("Resources/Template_Back.jpg"));
+    ArrayList<Question> questions;
     
 }
