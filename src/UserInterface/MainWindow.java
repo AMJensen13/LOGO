@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package UserInterface;
+import java.awt.Dimension;
 import javax.swing.*;
 
 /**
@@ -19,6 +20,15 @@ public class MainWindow extends JFrame{
         super("Logo");
         gameUI = new GameUI();
         mainMenu = new MainMenu();
+    }
+    
+    public void initUI()
+    {
+        gameUI.setPreferredSize(new Dimension(700,700));
+        gameUI.initUI();
+        mainMenu.initUI();
+        this.setJMenuBar(mainMenu);
+        this.add(gameUI);
     }
     
 }

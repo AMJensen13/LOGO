@@ -38,6 +38,8 @@ public class Game {
         mainWindow = new MainWindow();
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainWindow.setSize(750, 750);
+        mainWindow.setResizable(false);
+        mainWindow.initUI();
         mainWindow.setVisible(true);
     }
     
