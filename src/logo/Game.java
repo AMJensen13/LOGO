@@ -5,7 +5,16 @@
  */
 package logo;
 import UserInterface.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 import java.util.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 /**
  *
@@ -19,6 +28,7 @@ public class Game {
     Player currentPlayer;
     
     MainWindow mainWindow;
+    JDialog cardWindow;
     
     public Game()
     {
@@ -28,9 +38,14 @@ public class Game {
     
     public void start()
     {
+        boolean playing = true;
         setupUI();
         setupPlayers();
         
+        while(playing)
+        {
+            
+        }
     }
     
     private void setupUI()
@@ -41,6 +56,9 @@ public class Game {
         mainWindow.setResizable(false);
         mainWindow.initUI();
         mainWindow.setVisible(true);
+        
+        cardWindow = new JDialog();
+        
     }
     
     private void setupPlayers()
@@ -60,10 +78,28 @@ public class Game {
             
             players.add(new Player(name, (Enums.PawnType)pawn));
             availablePawns.remove((Enums.PawnType)pawn);
-            System.out.println(Arrays.toString(availablePawns.toArray()));
         }
         
         Collections.shuffle(players, new Random(System.currentTimeMillis()));
         currentPlayer = players.get(0);
+    }
+    
+    public class CardPanel extends JPanel
+    {
+        private BufferedImage image;
+        private ArrayList<Question> questions;
+        
+        public CardPanel(ArrayList<Question> questions, String imageName)
+        {
+            this.questions = questions;
+            try {
+                URL file = this.getClass().getClassLoader().getResource("Resources/.png");
+                image = ImageIO.read(file);
+            } catch(IOException e)
+            {
+                e.printStackTrace();
+                System.exit(1);
+            }
+        }
     }
 }
