@@ -18,6 +18,7 @@ public class Question {
     {
         correctAnswer = answer;
         question = theQuestion;
+        options = allOptions;
     }
     
     public String getQuestion()

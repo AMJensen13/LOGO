@@ -5,16 +5,11 @@
  */
 package logo;
 import UserInterface.*;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.URL;
-import java.util.*;
-import javax.imageio.ImageIO;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 import javax.swing.*;
 /**
  *
@@ -22,43 +17,117 @@ import javax.swing.*;
  */
 public class Game {
     ArrayList<Card> cards = new ArrayList<>(
-            Arrays.asList());
+            Arrays.asList(
+            new Card(new ArrayList<>(
+                    Arrays.asList(
+                        new Question("Name three of the four animals that make up Cadbury Chocolate Animal Biscuits?", "Monkey, Lion, Tiger", 
+                                new ArrayList<>(
+                                        Arrays.asList(
+                                            "Monkey, Lion, Tiger",
+                                            "Monkey",
+                                            "Kangaroo",
+                                            "Gorilla"))),
+                        new Question("What type of animal is COCO the COCO POPS character?", "Monkey", 
+                                new ArrayList<>(
+                                        Arrays.asList(
+                                            "Monkey, Lion, Tiger",
+                                            "Monkey",
+                                            "Kangaroo",
+                                            "Gorilla"))),
+                        new Question("Which animal adorns a can of Foster’s lager?", "Kangaroo", 
+                                new ArrayList<>(
+                                        Arrays.asList(
+                                            "Monkey, Lion, Tiger",
+                                            "Monkey",
+                                            "Kangaroo",
+                                            "Gorilla"))),
+                        new Question("What type of animal was playing the drums in the famous Cadbury Dairy Milk television advertisements?", "Gorilla", 
+                                new ArrayList<>(
+                                        Arrays.asList(
+                                            "Monkey, Lion, Tiger",
+                                            "Monkey",
+                                            "Kangaroo",
+                                            "Gorilla")))
+                    )), "AnimalTheme.jpg")
+            
+            
+            
+            
+            
+            ));
     ArrayList<Player> players;
     Deck deck;
-    Player currentPlayer;
+    public Player currentPlayer;
     
     MainWindow mainWindow;
-    JDialog cardWindow;
     
     public Game()
     {
         deck = new Deck(cards);
-        players = new ArrayList<Player>();
+        players = new ArrayList<>();
     }
     
     public void start()
     {
-        boolean playing = true;
-        setupUI();
         setupPlayers();
-        
-        while(playing)
+        setupUI();
+    }
+    
+    public Card drawCard()
+    {
+        return deck.drawCard();
+    }
+    
+    public void askQuestions(Card card)
+    {
+        Player startingPlayer = currentPlayer;
+        for(int i = 0; i < card.questions.size(); i++)
         {
-            
+            boolean correct = false;
+            Question q = card.questions.get(i);
+            while(!correct)
+            {
+                correct = askQuestion(q, i);
+                if(!correct) nextPlayer();
+                if(currentPlayer == startingPlayer)
+                    correct = true;
+            }
         }
+    }
+    
+    private void nextPlayer()
+    {
+        int idx = players.indexOf(currentPlayer) + 1;
+        if(idx >= players.size())
+            idx = 0;
+        currentPlayer = players.get(idx);
+    }
+    
+    private boolean askQuestion(Question q, int idx)
+    {
+        String answer = (String)JOptionPane.showInputDialog(mainWindow, 
+                                        currentPlayer.getName() + " please answer the following question:\n\n" + q.getQuestion(),
+                                        "", JOptionPane.PLAIN_MESSAGE, null, q.options.toArray(), q.options.get(0));
+                
+        if(answer.equals(q.correctAnswer))
+        {
+            JOptionPane.showMessageDialog(mainWindow, "That is correct!");
+            mainWindow.advancePawn(idx);
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(mainWindow, "Sorry, that is incorrect.");
+        }
+        return false;
     }
     
     private void setupUI()
     {
-        mainWindow = new MainWindow();
+        mainWindow = new MainWindow(this);
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainWindow.setSize(750, 750);
-        mainWindow.setResizable(false);
-        mainWindow.initUI();
-        mainWindow.setVisible(true);
-        
-        cardWindow = new JDialog();
-        
+        mainWindow.setSize(750, 1000);
+        mainWindow.setResizable(false); 
+        mainWindow.initUI(players);  
+        mainWindow.setVisible(true);     
     }
     
     private void setupPlayers()
@@ -82,24 +151,5 @@ public class Game {
         
         Collections.shuffle(players, new Random(System.currentTimeMillis()));
         currentPlayer = players.get(0);
-    }
-    
-    public class CardPanel extends JPanel
-    {
-        private BufferedImage image;
-        private ArrayList<Question> questions;
-        
-        public CardPanel(ArrayList<Question> questions, String imageName)
-        {
-            this.questions = questions;
-            try {
-                URL file = this.getClass().getClassLoader().getResource("Resources/.png");
-                image = ImageIO.read(file);
-            } catch(IOException e)
-            {
-                e.printStackTrace();
-                System.exit(1);
-            }
-        }
     }
 }

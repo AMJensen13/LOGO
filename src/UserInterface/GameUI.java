@@ -7,7 +7,9 @@ package UserInterface;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 import javax.swing.*;
+import logo.Player;
 /**
  *
  * @author AMJensen13
@@ -21,10 +23,10 @@ public class GameUI extends JPanel{
         boardUI = new BoardUI();
     }
     
-    public void initUI()
+    public void initUI(ArrayList<Player> players)
     {
         boardUI.setPreferredSize(new Dimension(600, 600));
         this.add(boardUI);
-        boardUI.initUI();
+        boardUI.initUI(players);
     }
 }

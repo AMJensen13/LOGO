@@ -4,31 +4,27 @@
  * and open the template in the editor.
  */
 package logo;
-import javax.swing.ImageIcon;
+import java.awt.Image;
+import java.io.IOException;
 import java.util.*;
+import javax.imageio.ImageIO;
 
 /**
  *
  * @author AMJensen13
  */
 public class Card {
-    ImageIcon questionSide;
-    ImageIcon logoSide;
-    ArrayList<Question> questions;
+    public Image pictureSide;
+    public ArrayList<Question> questions;
     
-    public Card(ArrayList<Question> questions)
+    public Card(ArrayList<Question> questions, String image)
     {
         this.questions = questions;
-        questionSide = new ImageIcon(this.getClass().getResource("Resources/Template_Back.jpg"));
-    }
-    
-    public Question getQuestion(int idx)
-    {
-        return questions.get(idx);
-    }
-    
-    public ImageIcon getQuestionImage()
-    {
-        return questionSide;
+        try{
+            pictureSide = ImageIO.read(this.getClass().getClassLoader().getResource("Resources/" + image));
+        } catch(IOException e)
+        {
+            
+        }
     }
 }
