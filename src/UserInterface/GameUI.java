@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package UserInterface;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class GameUI extends JPanel{
     
     public void initUI(ArrayList<Player> players)
     {
-        boardUI.setPreferredSize(new Dimension(600, 600));
+        boardUI.setPreferredSize(new Dimension(400, 400));
         this.add(boardUI);
         boardUI.initUI(players);
     }

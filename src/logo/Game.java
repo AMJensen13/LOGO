@@ -78,24 +78,7 @@ public class Game {
         return deck.drawCard();
     }
     
-    public void askQuestions(Card card)
-    {
-        Player startingPlayer = currentPlayer;
-        for(int i = 0; i < card.questions.size(); i++)
-        {
-            boolean correct = false;
-            Question q = card.questions.get(i);
-            while(!correct)
-            {
-                correct = askQuestion(q, i);
-                if(!correct) nextPlayer();
-                if(currentPlayer == startingPlayer)
-                    correct = true;
-            }
-        }
-    }
-    
-    private void nextPlayer()
+    public void nextPlayer()
     {
         int idx = players.indexOf(currentPlayer) + 1;
         if(idx >= players.size())
@@ -103,28 +86,11 @@ public class Game {
         currentPlayer = players.get(idx);
     }
     
-    private boolean askQuestion(Question q, int idx)
-    {
-        String answer = (String)JOptionPane.showInputDialog(mainWindow, 
-                                        currentPlayer.getName() + " please answer the following question:\n\n" + q.getQuestion(),
-                                        "", JOptionPane.PLAIN_MESSAGE, null, q.options.toArray(), q.options.get(0));
-                
-        if(answer.equals(q.correctAnswer))
-        {
-            JOptionPane.showMessageDialog(mainWindow, "That is correct!");
-            mainWindow.advancePawn(idx);
-            return true;
-        } else {
-            JOptionPane.showMessageDialog(mainWindow, "Sorry, that is incorrect.");
-        }
-        return false;
-    }
-    
     private void setupUI()
     {
         mainWindow = new MainWindow(this);
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainWindow.setSize(750, 1000);
+        mainWindow.setSize(1000, 650);
         mainWindow.setResizable(false); 
         mainWindow.initUI(players);  
         mainWindow.setVisible(true);     

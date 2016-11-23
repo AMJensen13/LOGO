@@ -31,10 +31,8 @@ public class Question {
         return options;
     }
     
-    public boolean CheckAnswer(int option)
+    public boolean CheckAnswer(String answer)
     {
-        String answer = options.get(option);
-        
         return answer.equals(correctAnswer);
     }
     

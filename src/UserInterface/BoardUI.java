@@ -12,10 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Dictionary;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import logo.Enums;
@@ -82,7 +79,7 @@ public class BoardUI extends JPanel {
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        g.drawImage(bgImage, 0, 0, 600, 600, this);
+        g.drawImage(bgImage, 0, 0, 400, 400, this);
         for(int i = 0; i < players.size(); i++)
         {
             Player p = players.get(i);
@@ -113,9 +110,9 @@ public class BoardUI extends JPanel {
     private void initTiles()
     {
         tiles.add(new Tile("Start", new ArrayList<>(Arrays.asList(
-                new Dimension(280, 508),
-                new Dimension(276, 480),
-                new Dimension(260, 485)
+                new Dimension(170, 308),
+                new Dimension(180, 330),
+                new Dimension(190, 335)
         ))));
         tiles.add(new Tile("Red", new ArrayList<>(Arrays.asList(
                 new Dimension(223, 467),
