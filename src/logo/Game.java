@@ -144,7 +144,39 @@ public class Game {
                                         "Ryan",
                                         "Brad",
                                         "Ken"))))
-                ), "PotLuck.jpg")
+                ), "PotLuck.jpg"),
+            
+            new Card(new ArrayList<>(
+                    Arrays.asList(
+                        new Question("Name the brand of soap", "Dove",
+                                new ArrayList<>(
+                                        Arrays.asList(
+                                        "Dove",
+                                        "Turkey",
+                                        "Peacock",
+                                        "Hummingbird"))),
+                        new Question("Name the brand of matches", "Swan Vestas",
+                                new ArrayList<>(
+                                        Arrays.asList(
+                                        "Eagle",
+                                        "Phoenix",
+                                        "Goose",
+                                        "Swan Vestas"))),
+                        new Question("Name the brand of shoe polish", "Kiwi",
+                                new ArrayList<>(
+                                        Arrays.asList(
+                                        "English Pigeon",
+                                        "Red Hawk",
+                                        "Kiwi",
+                                        "Roadrunner"))),
+                        new Question("Name the brand of cider", "Woodpecker",
+                                new ArrayList<>(
+                                        Arrays.asList(
+                                        "Crane",
+                                        "Woodpecker",
+                                        "Grey Goose",
+                                        "Yellow Tail"))))
+                ), "BirdsTheme.jpg")
             
             
             ));
