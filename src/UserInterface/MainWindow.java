@@ -234,6 +234,7 @@ public class MainWindow extends JFrame{
             {
                 JOptionPane.showMessageDialog(this, "That answer is correct!");
                 advancePawn(qNum);
+                startingPlayer = game.currentPlayer;
                 nextQuestion();
             }
         }
