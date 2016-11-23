@@ -110,24 +110,24 @@ public class BoardUI extends JPanel {
     private void initTiles()
     {
         tiles.add(new Tile("Start", new ArrayList<>(Arrays.asList(
-                new Dimension(170, 308),
+                new Dimension(165, 308),
                 new Dimension(180, 330),
                 new Dimension(190, 335)
         ))));
         tiles.add(new Tile("Red", new ArrayList<>(Arrays.asList(
-                new Dimension(223, 467),
-                new Dimension(220, 456),
-                new Dimension(228, 447)
+                new Dimension(157, 290),
+                new Dimension(146, 292),
+                new Dimension(146, 311)
         ))));
         tiles.add(new Tile("Yellow", new ArrayList<>(Arrays.asList(
-                new Dimension(176, 428),
-                new Dimension(147, 416),
-                new Dimension(113, 399)
+                new Dimension(124, 281),
+                new Dimension(101, 274),
+                new Dimension(82, 264)
         ))));
         tiles.add(new Tile("Purple", new ArrayList<>(Arrays.asList(
-                new Dimension(95, 351),
-                new Dimension(125, 323),
-                new Dimension(94, 288)
+                new Dimension(68, 200),
+                new Dimension(68, 230),
+                new Dimension(85, 216)
         ))));
         tiles.add(new Tile("Green", new ArrayList<>(Arrays.asList(
                 new Dimension(126, 244),

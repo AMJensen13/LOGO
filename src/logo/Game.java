@@ -203,12 +203,13 @@ public class Game {
         return deck.drawCard();
     }
     
-    public void nextPlayer()
+    public Player nextPlayer()
     {
         int idx = players.indexOf(currentPlayer) + 1;
         if(idx >= players.size())
             idx = 0;
         currentPlayer = players.get(idx);
+        return currentPlayer;
     }
     
     private void setupUI()

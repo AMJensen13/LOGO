@@ -5,6 +5,7 @@
  */
 package UserInterface;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -141,6 +142,7 @@ public class MainWindow extends JFrame{
         Player startingPlayer;
         int qNum;
         
+        JLabel currentPlayer;
         JLabel question;
         ButtonGroup group;
         JRadioButton opt1;
@@ -157,6 +159,7 @@ public class MainWindow extends JFrame{
         private void initUI()
         {
             this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+            currentPlayer = new JLabel();
             question = new JLabel();
             opt1 = new JRadioButton();
             opt2 = new JRadioButton();
@@ -169,6 +172,7 @@ public class MainWindow extends JFrame{
                 checkQuestion();
             });
             
+            this.add(currentPlayer);
             this.add(question);
             this.add(opt1);
             this.add(opt2);
@@ -183,6 +187,7 @@ public class MainWindow extends JFrame{
         {
             this.setVisible(true);
             this.startingPlayer = startingPlayer;
+            currentPlayer.setText("Current Player: " + this.startingPlayer.getName());
             currentCard = card;
             
             group.add(opt1);
@@ -198,22 +203,36 @@ public class MainWindow extends JFrame{
             String selected;
             
             if(opt1.isSelected())
+            {
                 selected = opt1.getText();
+                opt1.setSelected(false);
+            }
             else if(opt2.isSelected())
+            {
                 selected = opt2.getText();
+                opt2.setSelected(false);
+            }
             else if(opt3.isSelected())
+            {
                 selected = opt3.getText();
+                opt3.setSelected(false);
+            }
             else
+            {
                 selected = opt4.getText();
+                opt4.setSelected(false);
+            }
             
             if(!currentQuestion.CheckAnswer(selected))
             {
-                game.nextPlayer();
+                JOptionPane.showMessageDialog(this, "That answer is incorrect.");
+                currentPlayer.setText("Current Player: " + game.nextPlayer().getName());
                 if(startingPlayer.equals(game.currentPlayer))
                     this.setVisible(false);
             } 
             else
             {
+                JOptionPane.showMessageDialog(this, "That answer is correct!");
                 advancePawn(qNum);
                 nextQuestion();
             }
@@ -222,11 +241,29 @@ public class MainWindow extends JFrame{
         private void nextQuestion()
         {
             qNum = currentCard.questions.indexOf(currentQuestion) + 1;
+            Color col = Color.WHITE;
+            switch(qNum)
+            {
+                case 0:
+                    col = Color.RED;
+                    break;
+                case 1:
+                    col = Color.YELLOW;
+                    break;
+                case 2: 
+                    col = Color.MAGENTA;
+                    break;
+                case 3: 
+                    col = Color.GREEN;
+                    break;
+            }
+            
             if(qNum == currentCard.questions.size())
             {
                 this.setVisible(false);
                 return;
             }
+            question.setBackground(col);
             currentQuestion = currentCard.questions.get(qNum);
             
             question.setText(currentQuestion.getQuestion());
